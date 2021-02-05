@@ -3,6 +3,7 @@ package com.udacity.vehicles.api;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -151,8 +152,8 @@ public class CarControllerTest {
             this.restTemplate.delete("http://localhost:"+port+"/cars/2");
             ResponseEntity<Car> carDeletedResponse = this.restTemplate.getForEntity("http://localhost:"+port+"/cars/1", Car.class);
             Car deletedCar = carDeletedResponse.getBody();
-            assertThat(deletedCar.getCondition(),equalTo(getCar.getCondition()));
-            assertThat(deletedCar.getLocation().getAddress(),equalTo(getCar.getLocation().getAddress()));
+            assertNotEquals(deletedCar.getCondition(),getCar.getCondition());
+            assertNotEquals(deletedCar.getLocation().getAddress(),getCar.getLocation().getAddress());
 
         }
 
